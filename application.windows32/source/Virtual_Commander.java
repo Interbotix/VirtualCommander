@@ -67,10 +67,10 @@ char buttons;  //holds the data that represents the 8 pushbuttons.
 int [] buttonState ={0,0,0,0,0,0,0,0}; //Array to hold the current state of each button, 0=unpushed, 1=pushed
 int allButtons;
 
-int right_V = 128;   // Vertical position of the right joystick. 0 = All the way down, 128 = centered, 255 = all the way up
-int right_H = 128;   // Horizontal position of the right joystick. 0 = All the way left, 128 = centered, 255 = all the way right
-int left_H = 128;    // Vertical position of the right joystick. 0 = All the way down, 128 = centered, 255 = all the way up
-int left_V = 128;    // Horizontal position of the right joystick. 0 = All the way left, 128 = centered, 255 = all the way right
+int right_V = 128;   // Vertical position of the right joystick. 0 = All the way down, 127 = centered, 255 = all the way up
+int right_H = 128;   // Horizontal position of the right joystick. 0 = All the way left, 127 = centered, 255 = all the way right
+int left_H = 128;    // Vertical position of the right joystick. 0 = All the way down, 127 = centered, 255 = all the way up
+int left_V = 128;    // Horizontal position of the right joystick. 0 = All the way left, 127 = centered, 255 = all the way right
 
 int running = 0;
 int debug =1;
@@ -373,14 +373,15 @@ public void draw() {
   if(sPort != null)
   {
     sPort.write(0xff);          //header
-    sPort.write((char)right_V); //right vertical joystick
-    sPort.write((char)right_H); //right horizontal joystick
-    sPort.write((char)left_V);  //left vertical joystick
-    sPort.write((char)left_H);  //left horizontal joystick
+    sPort.write((byte)right_V); //right vertical joystick
+    sPort.write((byte)right_H); //right horizontal joystick
+    sPort.write((byte)left_V);  //left vertical joystick
+    sPort.write((byte)left_H);  //left horizontal joystick
     sPort.write(allButtons);    //single byte holds all the button data 
-    sPort.write((char)0);       //0 char
-    sPort.write((char)(255 - (right_V+right_H+left_V+left_H+allButtons)%256));  //checksum
+    sPort.write((byte)0);       //0 char
+    sPort.write((byte)(255 - (right_V+right_H+left_V+left_H+allButtons)%256));  //checksum
     delayMs(33);//delay 33ms for 30hz
+   // println(right_V)
   }
 }
 
