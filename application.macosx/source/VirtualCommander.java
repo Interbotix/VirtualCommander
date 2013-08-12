@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream; 
 import java.io.IOException; 
 
-public class Virtual_Commander extends PApplet {
+public class VirtualCommander extends PApplet {
 
 /****************************************************
 * Trossen Robotics Virtual Commander
@@ -446,7 +446,7 @@ public void stop()
 }
 
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "Virtual_Commander" };
+    String[] appletArgs = new String[] { "VirtualCommander" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {
